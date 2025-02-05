@@ -66,7 +66,7 @@ The remaining arguments have additional behaviour:
    - If zero, then the model uses a `SmagorinskyLilly` closure and `CenteredSecondOrder` advection.
    - If non-zero, then the model uses no closure and implicit `WENO` advection of order 9.
  - `ampl` Level of noise
-   - If `preinit_path` is empty, then `ampl` is the maximum absolute value of the symmetric uniform distribution that initialises the `u` and 'w' fields.
+   - If `preinit_path` is empty, then `ampl` is the maximum absolute value of the symmetric uniform distribution that initialises the `u` and `w` fields.
    - If `preinit_path` is set, then `ampl` is a prefactor that multiplies the fluctuation fields from the preinitialisation.
  - `init_time` The amount of time to restore the reference buoyancy profile for
  - `init_rate` The rate of buoyancy relaxation to the reference state during the initialisation
