@@ -65,7 +65,7 @@ end
 # Pass an integer to get that letter 
 function subfig_label!(scene, label::Integer; fontsize=14)
     char = 'a' + (label - 1)
-    subfig_label!(scene, "$char)"; fontsize=14)
+    subfig_label!(scene, "$char)"; fontsize)
 end
 # -------------------------------------------------------------
 
