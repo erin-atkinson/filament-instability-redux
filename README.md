@@ -48,3 +48,34 @@ Environment used on Niagara in `$SCRATCH/.julia-niagara`
   [6fe1bfb0] OffsetArrays v1.15.0
   [276daf66] SpecialFunctions v2.5.0
 ```
+## Usage
+If you would like to modify the simulations, there are a few options. Running a simulation is done with
+`julia [JULIA OPTIONS] -- path/to/simulation.jl output_folder stop_time save_interval Ro Ri α β Nx Ny Nz Q ampl init_time init_rate preinit preinit_path`
+A description of each of the arguments:
+### Basic arguments
+ - `output_folder` Path to folder for simulation output
+ - `stop_time` Simulation stop time in units of 1/f
+ - `save_interval` Time between saved snapshots
+ - `Ro` Minimum Rossby number of reference state
+ - `Ri` Minimum Richardson number of reference state
+ - `α` Ratio between filament separation and frontal jet width
+ - `β` Aspect ratio, mixed layer depth relative to filament separation
+ - `Nx` Number of across-front grid cells
+ - `Ny` Number of down-front grid cells (size of domain will be such that horizontal grid is isotropic)
+ - `Nz` Number of vertical grid cells (3/4 of which are in the mixed layer)
+### Modes
+The remaining arguments have additional behaviour:
+ - `Q` Surface cooling (flux of buoyancy upwards)
+   - If zero, then the model uses a `SmagorinskyLilly` closure and `CenteredSecondOrder` advection.
+   - If non-zero, then the model uses no closure and implicit `WENO` advection of order 9.
+ - `ampl` Level of noise
+   - If `preinit_path` is empty, then `ampl` is the maximum absolute value of the symmetric uniform distribution that initialises the `u` and 'w' fields.
+   - If `preinit_path` is set, then `ampl` is a prefactor that multiplies the fluctuation fields from the preinitialisation.
+ - `init_time` The amount of time to restore the reference buoyancy profile for
+ - `init_rate` The rate of buoyancy relaxation to the reference state during the initialisation
+ - `preinit` Whether this simulation is a pre-initialisation
+   - If true, the simulation runs as without a filament.
+   - If false, the simulation runs as normal.
+ - `preinit_path` Path to pre-initialisation
+   - If empty, the initial condition is some uniformly distributed noise with maximum absolute value `ampl` applied to the `u` and `w` fields.
+   - If set, the initial condition is the fluctuations in the final saved timestep in `preinit_path`, multiplied by `ampl`. 
