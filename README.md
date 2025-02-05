@@ -49,8 +49,8 @@ Environment used on Niagara in `$SCRATCH/.julia-niagara`
   [276daf66] SpecialFunctions v2.5.0
 ```
 ## Usage
-If you would like to modify the simulations, there are a few options. Running a simulation is done with
-`julia [JULIA OPTIONS] -- path/to/simulation.jl output_folder stop_time save_interval Ro Ri α β Nx Ny Nz Q ampl init_time init_rate preinit preinit_path`
+If you would like to modify the simulations, there are a few options. Running a simulation is done with\
+`julia [JULIA OPTIONS] -- path/to/simulation.jl output_folder stop_time save_interval Ro Ri α β Nx Ny Nz Q ampl init_time init_rate preinit preinit_path`\
 A description of each of the arguments:
 ### Basic arguments
  - `output_folder` Path to folder for simulation output
@@ -63,7 +63,7 @@ A description of each of the arguments:
  - `Nx` Number of across-front grid cells
  - `Ny` Number of down-front grid cells (size of domain will be such that horizontal grid is isotropic)
  - `Nz` Number of vertical grid cells (3/4 of which are in the mixed layer)
-### Modes
+### Additional arguments
 The remaining arguments have additional behaviour:
  - `Q` Surface cooling (flux of buoyancy upwards)
    - If zero, then the model uses a `SmagorinskyLilly` closure and `CenteredSecondOrder` advection.
