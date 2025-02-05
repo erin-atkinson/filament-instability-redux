@@ -150,13 +150,13 @@ end
 end
 
 # Get from a string
-@inline function get_field(filename::String, field, iteration)
-    jldopen(file->get_field(file, field, iteration), filename)
+@inline function get_field(filename::String, args...; kwargs...)
+    jldopen(file->get_field(file, args...; kwargs...), filename)
 end
 
 # Apply a function to the field after getting
-@inline function get_field(f::Function, args...)
-    f(get_field(args...))
+@inline function get_field(f::Function, args...; kwargs...)
+    f(get_field(args...; kwargs...))
 end
 # -------------------------------------------------------------
 
