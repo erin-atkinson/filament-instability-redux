@@ -74,7 +74,7 @@ The remaining arguments have additional behaviour:
  - `init_time` The amount of time to restore the reference buoyancy profile for
  - `init_rate` The rate of buoyancy relaxation to the reference state during the initialisation
  - `preinit` Whether this simulation is a pre-initialisation
-   - If true, the simulation runs as without a filament.
+   - If true, the simulation runs without a filament.
    - If false, the simulation runs as normal.
  - `preinit_path` Path to pre-initialisation
    - If empty, the initial condition is some uniformly distributed noise with maximum absolute value `ampl` applied to the `u` and `w` fields.
