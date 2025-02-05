@@ -63,13 +63,15 @@ tracers = (:b, )
 include("boundary_conditions.jl")
 include("forcing.jl")
 
+closure = sp.Q == 0 ? SmagorinskyLilly(; Pr=1) : nothing
+advection = sp.Q == 0 ? CenteredSecondOrder() : WENO(; order=9)
 @info "Creating model"
 model = NonhydrostaticModel(;
     grid,
     coriolis = FPlane(sp.f),
     clock=Clock(time=-sp.init_time),
-    closure=SmagorinskyLilly(; Pr=1),
-#    advection=WENO(; order=9),
+    closure,
+    advection,
     buoyancy=BuoyancyTracer(),
     tracers,
     boundary_conditions,
@@ -108,16 +110,27 @@ end
 (u, v, w) = model.velocities
 b = model.tracers.b
 p = model.pressures.pHY′ + model.pressures.pNHS
-ν = model.diffusivity_fields.νₑ
 
-simulation.output_writers[:output] = JLD2OutputWriter(
-    model,
-    (; u, v, w, b, p, ν),
-    filename = joinpath(output_folder, "output.jld2"),
-    schedule = TimeInterval(save_interval),
-    overwrite_existing = false,
-    with_halos=true
-)
+if sp.Q == 0
+    ν = model.diffusivity_fields.νₑ
+    simulation.output_writers[:output] = JLD2OutputWriter(
+        model,
+        (; u, v, w, b, p, ν),
+        filename = joinpath(output_folder, "output.jld2"),
+        schedule = TimeInterval(save_interval),
+        overwrite_existing = false,
+        with_halos=true
+    )
+else
+    simulation.output_writers[:output] = JLD2OutputWriter(
+        model,
+        (; u, v, w, b, p),
+        filename = joinpath(output_folder, "output.jld2"),
+        schedule = TimeInterval(save_interval),
+        overwrite_existing = false,
+        with_halos=true
+    )
+end
 
 simulation.output_writers[:checkpointer] = Checkpointer(model;
     schedule=TimeInterval(50save_interval),

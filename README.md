@@ -13,7 +13,7 @@ To recreate figures for publication, submit jobs as follows
 `scripts/preinit/m4.sh` -> `scripts/amplitude/m4.sh`\
 `scripts/preinit/m6.sh` -> `scripts/amplitude/m6.sh`\
 `scripts/preinit/m8.sh` -> `scripts/amplitude/m8.sh`\
-`scripts/preinit/cooling-10.sh`\
+`scripts/preinit/cooling-10.sh`
 
 ### Niagara (post-process)
 `scripts/post-process/pp-Ri00.sh`\
@@ -22,11 +22,13 @@ To recreate figures for publication, submit jobs as follows
 `scripts/post-process/pp-m4.sh`\
 `scripts/post-process/pp-m6.sh`\
 `scripts/post-process/pp-m8.sh`\
-`scripts/post-process/pp-cooling-preinit.sh`\
+`scripts/post-process/pp-cooling-preinit.sh`
 
-### Figures, videos in notebook
+### Figures
+`paper_figures.jl` creates all figures\
 
-Environment used on Mist (PowerPC) in `$SCRATCH/.julia-mist`\
+
+Environment used on Mist (PowerPC) in `$SCRATCH/.julia-mist`
 ```
   [a9b6321e] Atomix v0.1.0 ⚲
   [052768ef] CUDA v5.3.5 ⚲
@@ -36,7 +38,7 @@ Environment used on Mist (PowerPC) in `$SCRATCH/.julia-mist`\
   [276daf66] SpecialFunctions v2.5.0
 ```
 
-Environment used on Niagara in `$SCRATCH/.julia-niagara`\
+Environment used on Niagara in `$SCRATCH/.julia-niagara`
 ```
   [a9b6321e] Atomix v0.1.0 ⚲
   [6a3955dd] ImageFiltering v0.7.9
