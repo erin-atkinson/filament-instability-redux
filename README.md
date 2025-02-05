@@ -75,4 +75,4 @@ The remaining arguments have additional behaviour:
    - If false, the simulation runs as normal.
  - `preinit_path` Path to pre-initialisation
    - If empty, the initial condition is some uniformly distributed noise with maximum absolute value `ampl` applied to the `u` and `w` fields.
-   - If set, the initial condition is the fluctuations in the final saved timestep in `preinit_path`, multiplied by `ampl`. 
+   - If set, the initial condition is the reference state plus the fluctuations in the final saved timestep in `preinit_path`, multiplied by `ampl`. 
