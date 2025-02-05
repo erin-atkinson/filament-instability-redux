@@ -66,3 +66,5 @@ map(filenames, figures) do filename, fig
     println(filename)
     save(joinpath(output_folder, filename), fig; px_per_unit=2)
 end
+
+println("Done!")
