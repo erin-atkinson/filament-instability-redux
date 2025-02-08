@@ -29,6 +29,16 @@ function write_outputs(filename, outputs, iteration)
         end
     end
 end
+
+grid, iters, ts = jldopen("$foldername/output.jld2") do file
+    iters = keys(file["timeseries/t"])
+    file["serialized/grid"], iters, [file["timeseries/t/$iter"] for iter in iters]
+end
+
+sp = jldopen("$foldername/parameters.jld2") do file
+    file["simulation"]
+end
+
 @info "Reading timeseries from file"
 u_series = FieldTimeSeries("$foldername/output.jld2", "u"; backend=OnDisk())
 v_series = FieldTimeSeries("$foldername/output.jld2", "v"; backend=OnDisk())
@@ -36,7 +46,11 @@ w_series = FieldTimeSeries("$foldername/output.jld2", "w"; backend=OnDisk())
 
 b_series = FieldTimeSeries("$foldername/output.jld2", "b"; backend=OnDisk())
 
-ν_series = FieldTimeSeries("$foldername/output.jld2", "ν"; backend=OnDisk())
+if sp.Q == 0
+    ν_series = FieldTimeSeries("$foldername/output.jld2", "ν"; backend=OnDisk())
+else
+    ν_series = CenterField(grid)
+end
 
 p_series = FieldTimeSeries("$foldername/output.jld2", "p"; backend=OnDisk())
 
@@ -57,14 +71,6 @@ p = p_series[1]
 @info φ
 @info ν
 =#
-grid, iters, ts = jldopen("$foldername/output.jld2") do file
-    iters = keys(file["timeseries/t"])
-    file["serialized/grid"], iters, [file["timeseries/t/$iter"] for iter in iters]
-end
-
-sp = jldopen("$foldername/parameters.jld2") do file
-    file["simulation"]
-end
 
 # Include script file which should define a named tuple of outputs, temp_outputs (which are deleted after)
 # and a function called update_outputs!
@@ -84,7 +90,7 @@ for (i, iter) in enumerate(iters)
 
     b .= b_series[i]
     
-    ν .= ν_series[i]
+    ν .= ν_series[min(i, length(ν_series))]
     
     p .= p_series[i]
     update_outputs!(outputs)
