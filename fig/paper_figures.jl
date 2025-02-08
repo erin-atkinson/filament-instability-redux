@@ -35,8 +35,8 @@ filenames = [
 figures = [
     noise_figure(preinit_foldername),
     tke_figure(Ri_foldernames, Ri_titles),
-    wVSP_figure(foldername, 1.8, -0.05; σ=0, σh=1),
-    wVSP_figure(foldername, 3.6, -0.05; σ=0, σh=1),
+    wVSP_figure(foldername, 1.88, -0.05; σ=0, σh=1),
+    wVSP_figure(foldername, 2.89, -0.05; σ=0, σh=1),
     snapshots_figure(foldername, 2π .* [0.7, 1.4, 2.1]),
     hovmoller_figure(foldername; marked_times=[0.7, 1.4, 2.1]),
     psi_balance_figure(Ri_foldernames, Ri_titles)
@@ -58,7 +58,7 @@ filenames = [
 figures = [
     w_slices_figure(amplitude_foldernames[end], 4, 4.5, -0.05),
     tke_figure(amplitude_foldernames, amplitude_titles; ax_kw=(; limits=(0, 4, -0.2, 1.7)), tke₀=true),
-    hovmoller_figure(amplitude_foldernames[end]),
+    hovmoller_figure(amplitude_foldernames[end]; ht_b_kw=(; colorrange=(-10, 10)), ht_ϵ_kw=(; colorrange=(0, 2))),
     psi_balance_figure(amplitude_foldernames, amplitude_titles; σ=3)
 ]
 
