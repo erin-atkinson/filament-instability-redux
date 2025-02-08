@@ -72,7 +72,6 @@ function hovmoller_figure(
     ht_ϵ_kw = (;
         colormap=ϵ_colors,
         colorrange=(0, 1),
-        lowclip=ϵ_colors[1],
         highclip=ϵ_colors[end],
         ht_ϵ_kw...
     )
