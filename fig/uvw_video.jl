@@ -47,18 +47,21 @@ function uvw_video(
     
     # Set each title
     d_u_title = :title in keys(ax_u_kw) ? ax_u_kw.title : ""
-    u_title = @lift let t_val = round(sp.f * $t / 2π; digits=2)
-        L"%$d_u_title $ft / 2\pi = %$t_val$"
+    u_title = @lift let t_val = rpad(round(sp.f * $t / 2π; digits=2), 4, '0')
+        hr_val = rpad(round(T * $t / 3600; digits=2), 5, '0')
+        L"%$d_u_title $ft / 2\pi = %$t_val \quad t = %$hr_val~\text{hr}$"
     end
     
     d_v_title = :title in keys(ax_v_kw) ? ax_v_kw.title : ""
-    v_title = @lift let t_val = round(sp.f * $t / 2π; digits=2)
-        L"%$d_v_title $ft / 2\pi = %$t_val$"
+    v_title = @lift let t_val = rpad(round(sp.f * $t / 2π; digits=2), 4, '0')
+        hr_val = rpad(round(T * $t / 3600; digits=2), 5, '0')
+        L"%$d_v_title $ft / 2\pi = %$t_val \quad t = %$hr_val~\text{hr}$"
     end
     
     d_w_title = :title in keys(ax_w_kw) ? ax_w_kw.title : ""
-    w_title = @lift let t_val = round(sp.f * $t / 2π; digits=2)
-        L"%$d_w_title $ft / 2\pi = %$t_val$"
+    w_title = @lift let t_val = rpad(round(sp.f * $t / 2π; digits=2), 4, '0')
+        hr_val = rpad(round(T * $t / 3600; digits=2), 5, '0')
+        L"%$d_w_title $ft / 2\pi = %$t_val \quad t = %$hr_val~\text{hr}$"
     end
     
     ax_u_kw = (;
@@ -73,14 +76,14 @@ function uvw_video(
         ylabel=L"z/\text{m}",
         limits=(-3*L*sp.L/1000, 3*L*sp.L/1000, -1.2sp.H * L, 0),
         ax_v_kw...,
-        title=v_title
+        title=""
     )
     ax_w_kw = (; 
         xlabel=L"x/\text{km}",
         ylabel=L"z/\text{m}",
         limits=(-3*L*sp.L/1000, 3*L*sp.L/1000, -1.2sp.H * L, 0),
         ax_w_kw...,
-        title=w_title
+        title=""
     )
     
     ht_u_kw=(;
@@ -140,11 +143,13 @@ function uvw_video(
     subfig_label!(fig[2, 1], 2)
     subfig_label!(fig[3, 1], 3)
     
+    lines!(ax_w, [ax_w_kw.limits[1], ax_w_kw.limits[2]], [h, h]*L; color=(:red, 0.5), linestyle=:dash)
+    
     record(fig, output_filename, frames; framerate=12) do i
         frame[] = i
         print("$(frames[1])->$i->$(frames[end])\r")
     end
-    
+    println("")
     close(DFM)
     
     fig

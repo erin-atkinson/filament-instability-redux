@@ -125,9 +125,9 @@ function wVSP_figure(
     
     lines!(ax_w, [ax_w_kw.limits[1], ax_w_kw.limits[2]], [h, h]*L; color=(:red, 0.5), linestyle=:dash)
     
-    Colorbar(fig[1, 2], ht_w; label=L"w / \text{cms}^{-1}")
+    Colorbar(fig[1, 2], ht_w; label=L"w(x, 0, z) / \text{cms}^{-1}")
     Colorbar(fig[1, 4], ht_vsp; label=L"-10^8\overline{\mathbf{u}}_z \cdot \overline{w'\mathbf{u}'} / \text{m}^{2}\text{s}^{-3}")
-    Colorbar(fig[2, 4], ht_wh; label=L"w / \text{cms}^{-1}")
+    Colorbar(fig[2, 4], ht_wh; label=L"w(x, y, z=%$(round(h * L; sigdigits=0))~\text{m}) / \text{cms}^{-1}")
     
     #colgap!(fig.layout, 1, 30)
     #colgap!(fig.layout, 2, 30)
