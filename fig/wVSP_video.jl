@@ -11,6 +11,7 @@ function wVSP_video(
         ht_vsp_kw=(; ),
         ht_wh_kw=(; ),
         ct_b_kw=(; ),
+        record_kw=(; ),
         σ=0,
         σh=0
     )
@@ -152,7 +153,12 @@ function wVSP_video(
     subfig_label!(fig[1, 3], 2)
     subfig_label!(fig[2, 1:3], 3)
     
-    record(fig, output_filename, frames; framerate=12) do i
+    record_kw = (;
+        framerate=12,
+        record_kw...
+    )
+    
+    record(fig, output_filename, frames; record_kw...) do i
         frame[] = i
         print("$output_filename: $(frames[1])->$i->$(frames[end])\r")
     end

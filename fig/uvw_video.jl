@@ -10,6 +10,7 @@ function uvw_video(
         ht_v_kw=(; ),
         ht_w_kw=(; ),
         ct_b_kw=(; ),
+        record_kw=(; ),
         σ=0
     )
     
@@ -145,7 +146,12 @@ function uvw_video(
     
     lines!(ax_w, [ax_w_kw.limits[1], ax_w_kw.limits[2]], [h, h]*L; color=(:red, 0.5), linestyle=:dash)
     
-    record(fig, output_filename, frames; framerate=12) do i
+    record_kw = (;
+        framerate=12,
+        record_kw...
+    )
+    
+    record(fig, output_filename, frames; record_kw...) do i
         frame[] = i
         print("$output_filename: $(frames[1])->$i->$(frames[end])\r")
     end

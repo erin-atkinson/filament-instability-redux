@@ -83,10 +83,11 @@ figures = [
 
 println("Videos")
 
-wVSP_video(foldername, joinpath(output_folder, "Ri00-w-vsp-video.mp4"), -0.05; σh=1, 
+wVSP_video(foldername, joinpath(output_folder, "Ri00-w-vsp-video.mp4"), -0.05, 1:126; σh=1, 
     ht_w_kw=(; colorrange=(-1, 1)),
     ht_vsp_kw=(; colorrange=(-5, 5)),
     ht_wh_kw=(; colorrange=(-1, 1)),
-
+    record_kw=(; compression=23)
 )
+
 println("Done!")
