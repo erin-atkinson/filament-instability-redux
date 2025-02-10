@@ -3,7 +3,7 @@
 #SBATCH --gpus-per-node=1
 #SBATCH --time=24:00:00
 #SBATCH --job-name=SM18
-#SBATCH --output=../scratch/logs/SM18.txt
+#SBATCH --output=../scratch/logs/SM18_1.txt
 
 module load julia/1.10.4
 export JULIA_DEPOT_PATH=$SCRATCH/.julia-mist
@@ -11,7 +11,7 @@ export JULIA_SCRATCH_TRACK_ACCESS=0
 
 cd ~/filament-instability-redux
 
-STOP_TIME="6.0"
+STOP_TIME="18.0"
 SAVE_INTERVAL="0.1"
 ROSSBY="0.8"
 RICHARDSON="0.001"
