@@ -42,8 +42,9 @@ figures = [
     psi_balance_figure(Ri_foldernames, Ri_titles)
 ]
 
+println("Main text")
 map(filenames, figures) do filename, fig
-    println(filename)
+    println(" ", filename)
     save(joinpath(output_folder, filename), fig; px_per_unit=2)
 end
 
@@ -62,9 +63,30 @@ figures = [
     psi_balance_figure(amplitude_foldernames, amplitude_titles; σ=3)
 ]
 
+println("Appendix")
 map(filenames, figures) do filename, fig
-    println(filename)
+    println(" ", filename)
     save(joinpath(output_folder, filename), fig; px_per_unit=2)
 end
 
+# Videos
+filenames = [
+    "Ri00-wVSP",
+]
+
+figures = [
+    w_slices_figure(amplitude_foldernames[end], 4, 4.5, -0.05),
+    tke_figure(amplitude_foldernames, amplitude_titles; ax_kw=(; limits=(0, 4, -0.2, 1.7)), tke₀=true),
+    hovmoller_figure(amplitude_foldernames[end]; ht_b_kw=(; colorrange=(-10, 10)), ht_ϵ_kw=(; colorrange=(0, 2))),
+    psi_balance_figure(amplitude_foldernames, amplitude_titles; σ=3)
+]
+
+println("Videos")
+
+wVSP_video(foldername, joinpath(output_folder, "Ri00-w-vsp-video.mp4"), -0.05; σh=1, 
+    ht_w_kw=(; colorrange=(-1, 1)),
+    ht_vsp_kw=(; colorrange=(-5, 5)),
+    ht_wh_kw=(; colorrange=(-1, 1)),
+
+)
 println("Done!")

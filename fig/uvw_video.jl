@@ -147,7 +147,7 @@ function uvw_video(
     
     record(fig, output_filename, frames; framerate=12) do i
         frame[] = i
-        print("$(frames[1])->$i->$(frames[end])\r")
+        print("$output_filename: $(frames[1])->$i->$(frames[end])\r")
     end
     println("")
     close(DFM)
