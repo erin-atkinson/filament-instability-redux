@@ -50,10 +50,12 @@ function uvw_video(
     u_title = @lift let t_val = round(sp.f * $t / 2π; digits=2)
         L"%$d_u_title $ft / 2\pi = %$t_val$"
     end
+    
     d_v_title = :title in keys(ax_v_kw) ? ax_v_kw.title : ""
     v_title = @lift let t_val = round(sp.f * $t / 2π; digits=2)
         L"%$d_v_title $ft / 2\pi = %$t_val$"
     end
+    
     d_w_title = :title in keys(ax_w_kw) ? ax_w_kw.title : ""
     w_title = @lift let t_val = round(sp.f * $t / 2π; digits=2)
         L"%$d_w_title $ft / 2\pi = %$t_val$"
@@ -112,6 +114,8 @@ function uvw_video(
     ax_u = Axis(fig[1, 1]; ax_u_kw...)
     ax_v = Axis(fig[2, 1]; ax_v_kw...)
     ax_w = Axis(fig[3, 1]; ax_w_kw...)
+    hidexdecorations!(ax_v; ticks=false)
+    hidexdecorations!(ax_w; ticks=false)
     
     DFM = jldopen(filename)
     
@@ -131,6 +135,10 @@ function uvw_video(
     Colorbar(fig[1, 2], ht_u; label=L"u / \text{ms}^{-1}")
     Colorbar(fig[2, 2], ht_v; label=L"v / \text{ms}^{-1}")
     Colorbar(fig[3, 2], ht_w; label=L"w / \text{ms}^{-1}")
+    
+    subfig_label!(fig[1, 1], 1)
+    subfig_label!(fig[2, 1], 2)
+    subfig_label!(fig[3, 1], 3)
     
     record(fig, output_filename, frames; framerate=12) do i
         frame[] = i
