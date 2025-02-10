@@ -1,3 +1,6 @@
+# uvw_video.jl
+# Video of the components of velocity
+
 function uvw_video(
         foldername,
         output_filename,

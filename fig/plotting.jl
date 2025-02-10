@@ -1,3 +1,9 @@
+# plotting.jl
+# Various helper functions for making figures
+# -------------------------------------------------------------
+
+
+# -------------------------------------------------------------
 using JLD2
 using ImageFiltering: imfilter, Kernel.gaussian
 using OffsetArrays: no_offset_view

@@ -1,5 +1,5 @@
 # paper_figures.jl
-# Create all figures for the paper and save
+# Create all figures for the paper and supplementary video
 
 output_folder = "paper-figures"
 

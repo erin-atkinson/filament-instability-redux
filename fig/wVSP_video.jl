@@ -1,3 +1,7 @@
+# wVSP_video.jl
+# Video of vertical and horizontal slices of vertical velocity, and the mean contribution to vertical shear production
+# h: vertical slice level
+
 function wVSP_video(
         foldername,
         output_filename,

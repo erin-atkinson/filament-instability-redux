@@ -1,3 +1,7 @@
+# wVSP.jl
+# Image of vertical and horizontal slices of vertical velocity, and the mean contribution to vertical shear production
+# h: vertical slice level
+
 function wVSP_figure(
         foldername,
         t,
